@@ -1,0 +1,13 @@
+{ 
+    id: 25, 
+    title: "নতুন পণ্য", 
+    category: "ক্যাটাগরি", 
+    originalPrice: 5000, 
+    currentPrice: 2500, 
+    emoji: "🎁", 
+    rating: 4.5, 
+    reviews: 100, 
+    seller: "বিক্রেতা নাম",
+    hotDeal: true,
+    description: "পণ্যের বর্ণনা"
+}
