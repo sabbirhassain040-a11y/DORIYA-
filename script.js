@@ -2,6 +2,30 @@
 
 // প্রোডাক্ট ডাটাবেস
 const products = [
+    const products = [
+    { 
+        id: 1, 
+        name: "স্মার্ট ওয়াচ X200", 
+        price: 2500, 
+        category: "ইলেকট্রনিক্স", 
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" 
+    },
+    { 
+        id: 2, 
+        name: "পেন্থার টি-শার্ট (ব্ল্যাক)", 
+        price: 550, 
+        category: "ফ্যাশন", 
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" 
+    },
+    { 
+        id: 3, 
+        name: "ওয়ারলেস হেডফোন", 
+        price: 1800, 
+        category: "ইলেকট্রনিক্স", 
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" 
+    }
+];
+
     // ইলেকট্রনিক্স
     { id: 1, title: "স্মার্ট ওয়াচ প্রো", category: "ইলেকট্রনিক্স", originalPrice: 8999, currentPrice: 3999, emoji: "⌚", rating: 4.5, reviews: 250, seller: "টেক স্টোর বাংলাদেশ", hotDeal: true, description: "সর্বশেষ প্রযুক্তির স্মার্ট ওয়াচ যা আপনার স্বাস্থ্য ট্র্যাক করতে পারে।" },
     { id: 2, title: "ওয়্যারলেস ইয়ারবাড", category: "ইলেকট্রনিক্স", originalPrice: 4999, currentPrice: 1999, emoji: "🎧", rating: 4.3, reviews: 180, seller: "অডিও প্লাস", hotDeal: true, description: "উচ্চমানের সাউন্ড কোয়ালিটি সহ ওয়্যারলেস ইয়ারবাড।" },
