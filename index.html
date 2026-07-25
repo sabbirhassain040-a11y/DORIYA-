@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DORIYA - ফ্রি মার্কেটপ্লেস</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- হেডার -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo-container">
+                <svg class="brand-icon" viewBox="0 0 100 100">
+                    <circle cx="50" cy="30" r="12" fill="#ff3e6c"/>
+                    <ellipse cx="50" cy="45" rx="18" ry="22" fill="#ff3e6c"/>
+                    <path d="M 32 65 Q 32 75 40 80 L 60 80 Q 68 75 68 65" fill="#ff3e6c"/>
+                    <rect x="42" y="35" width="16" height="35" fill="#fff" opacity="0.3"/>
+                </svg>
+                <span class="logo-text">DORIYA</span>
+            </div>
+            <div class="header-right">
+                <input type="text" class="search-input" id="searchInput" placeholder="প্রোডাক্ট খুঁজুন...">
+                <button class="cart-btn" onclick="toggleCart()">
+                    🛒 কার্ট (<span id="cartCount">0</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- ক্যাটাগরি নেভিগেশন -->
+        <nav class="category-nav">
+            <button class="category-btn active" onclick="filterByCategory('সব')">সব</button>
+            <button class="category-btn" onclick="filterByCategory('ইলেকট্রনিক্স')">ইলেকট্রনিক্স</button>
+            <button class="category-btn" onclick="filterByCategory('ফ্যাশন')">ফ্যাশন</button>
+            <button class="category-btn" onclick="filterByCategory('বই')">বই</button>
+            <button class="category-btn" onclick="filterByCategory('খেলনা')">খেলনা</button>
+            <button class="category-btn" onclick="filterByCategory('হোম')">হোম</button>
+            <button class="category-btn" onclick="filterByCategory('বিউটি')">বিউটি</button>
+        </nav>
+    </header>
+
+    <!-- মেইন কনটেন্ট -->
+    <main class="main-container">
+        <!-- ফিল্টার সাইডবার -->
+        <aside class="sidebar">
+            <h3>ফিল্টার</h3>
+            
+            <div class="filter-group">
+                <h4>মূল্য পরিসীমা</h4>
+                <input type="range" id="priceRange" min="0" max="50000" value="50000" oninput="filterByPrice(this.value)">
+                <p>৳ 0 - ৳ <span id="priceValue">50000</span></p>
+            </div>
+
+            <div class="filter-group">
+                <h4>রেটিং</h4>
+                <label><input type="checkbox" onchange="filterProducts()"> ⭐ 4+ তারকা</label><br>
+                <label><input type="checkbox" onchange="filterProducts()"> ⭐ 3+ তারকা</label><br>
+                <label><input type="checkbox" onchange="filterProducts()"> ⭐ 2+ তারকা</label>
+            </div>
+
+            <div class="filter-group">
+                <h4>অফার</h4>
+                <label><input type="checkbox" onchange="filterProducts()"> হট ডিল</label><br>
+                <label><input type="checkbox" onchange="filterProducts()"> ফ্ল্যাশ সেল</label>
+            </div>
+
+            <button class="reset-btn" onclick="resetFilters()">রিসেট করুন</button>
+        </aside>
+
+        <!-- প্রোডাক্ট গ্রিড -->
+        <section class="products-section">
+            <div class="hot-deals-banner">
+                🔥 আজকের হট ডিল - ৭০% পর্যন্ত ছাড়!
+            </div>
+
+            <div class="product-grid" id="productGrid">
+                <!-- প্রোডাক্ট কার্ড এখানে লোড হবে -->
+            </div>
+        </section>
+    </main>
+
+    <!-- কার্ট সাইডবার -->
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 আপনার কার্ট</h2>
+            <button class="close-btn" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">কার্ট খালি</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>মোট: ৳ <span id="cartTotal">0</span></strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">চেকআউট করুন</button>
+            <button class="clear-cart-btn" onclick="clearCart()">কার্ট পরিষ্কার করুন</button>
+        </div>
+    </aside>
+
+    <!-- AI চ্যাটবট -->
+    <div class="ai-chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3>🤖 DORIYA AI সহায়ক</h3>
+            <button class="close-btn" onclick="toggleChatbot()">✕</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message">
+                <p>আসালামু আলাইকুম! 👋 আমি DORIYA AI সহায়ক। আমি আপনাকে সেরা প্রোডাক্ট খুঁজে পেতে সাহায্য করতে পারি। কী চান?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="আপনার প্রশ্ন...">
+            <button onclick="sendChatMessage()">পাঠান</button>
+        </div>
+    </div>
+
+    <!-- চ্যাটবট টগল বাটন -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">🤖 AI</button>
+
+    <!-- প্রোডাক্ট ডিটেইল মডেল -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">✕</button>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="প্রোডাক্ট">
+                <div class="modal-details">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalCategory" class="category-tag"></p>
+                    <div class="rating-section">
+                        <span id="modalRating">⭐ 4.5</span>
+                        <span id="modalReviews">(250 রিভিউ)</span>
+                    </div>
+                    <p id="modalDescription"></p>
+                    <div class="price-section">
+                        <span class="original-price" id="modalOriginalPrice">৳ 5000</span>
+                        <span class="discount-price" id="modalDiscountPrice">৳ 2500</span>
+                        <span class="discount-percent" id="modalDiscount">50% ছাড়</span>
+                    </div>
+                    <div class="seller-info">
+                        <p><strong>বিক্রেতা:</strong> <span id="modalSeller"></span></p>
+                        <p><strong>ডেলিভারি:</strong> ২-৩ দিনে বিনামূল্যে</p>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCartFromModal()">কার্টে যোগ করুন</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
